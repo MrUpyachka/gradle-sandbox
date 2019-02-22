@@ -17,6 +17,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -31,6 +32,7 @@ import java.security.cert.CertificateException;
 
 
 @RunWith(SpringRunner.class)
+@EnableWebSecurity
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:test.properties")
 public class ControllerIT {
@@ -48,7 +50,7 @@ public class ControllerIT {
 
     @Before
     public void setupSsl() throws KeyStoreException, CertificateException, NoSuchAlgorithmException,
-            IOException, KeyManagementException, UnrecoverableKeyException {
+            IOException, KeyManagementException {
         final char[] keystorePassChars = keystorePassword.toCharArray();
         final SSLContext sslContext = SSLContexts.custom()
                 .loadTrustMaterial(createKeystoreFile(), keystorePassChars)
