@@ -23,14 +23,17 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    def withoutDefaultLogging = {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'org.slf4j', module: 'log4j-over-slf4j'
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', withoutDefaultLogging
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', withoutDefaultLogging
     testCompile group: 'org.apache.httpcomponents', name: 'httpcore', version: '+'
     testCompile group: 'org.apache.httpcomponents', name: 'httpclient', version: '+'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '+'
 
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '+'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '+'
     testCompile group: 'junit', name: 'junit', version: '+'
 }

@@ -5,13 +5,13 @@ Sandbox to test SSL connection with certificates
 
 - Create server keystore with certificate
 ```
-keytool -genkeypair -keystore server_keystore.p12 -storetype PKCS12 -storepass server -alias self-signed -keyalg RSA -keysize 2048 -validity 365 -dname "CN=Test SSL certificate, OU=Sandbox, O=Sandbox, L=Sandbox, ST=Sandbox, C=ZZ" -ext san=dns:localhost,ip:127.0.0.1
+keytool -genkey -alias self-signed -storetype PKCS12 -keyalg RSA -keystore server_keystore.p12 -validity 3650 -dname "CN=localhost, OU=Sandbox, O=Sandbox, L=Sandbox, ST=ZZ, C=ZZ" -storepass server
 ```
 - Export server certificate
 ```
-keytool -exportcert -keystore server_keystore.p12 -storepass server -alias self-signed -rfc -file public-certificate.pem
+keytool -export -alias self-signed -keystore server_keystore.p12 -file public-certificate -storepass server
 ```
 - Create client keystore and import certificate
 ```
-keytool -importcert -file public-certificate.pem -alias server -keystore client_keystore.p12 -storepass client
+keytool -importcert -storetype PKCS12 -keystore client_keystore.p12 -alias public-certificate -storepass client -file public-certificate -noprompt
 ```
