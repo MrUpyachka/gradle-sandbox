@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+group 'local.upya'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile group: 'org.apache.httpcomponents', name: 'httpcore', version: '+'
+    testCompile group: 'org.apache.httpcomponents', name: 'httpclient', version: '+'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '+'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '+'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '+'
+    testCompile group: 'junit', name: 'junit', version: '+'
+}
